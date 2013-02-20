@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Фев 20 2013 г., 00:47
+-- Время создания: Фев 21 2013 г., 01:28
 -- Версия сервера: 5.5.25
 -- Версия PHP: 5.3.13
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- База данных: `shmaliym_cat`
+-- База данных: `shmaliym_new`
 --
 
 -- --------------------------------------------------------
@@ -946,6 +946,28 @@ INSERT INTO `tags` (`id`, `tag`) VALUES
 (7, 'проститутки'),
 (8, 'измена'),
 (9, 'минет');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `zf_users`
+--
+
+DROP TABLE IF EXISTS `zf_users`;
+CREATE TABLE IF NOT EXISTS `zf_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Дамп данных таблицы `zf_users`
+--
+
+INSERT INTO `zf_users` (`id`, `username`, `password`, `role`) VALUES
+(1, 'admin', 'admin', 'admin');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
