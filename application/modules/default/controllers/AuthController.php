@@ -20,7 +20,7 @@ class AuthController extends Sunny_Controller_AdminAction
 	
 	public function indexAction()
 	{
-		$this->_helper->redirector('login');
+		$this->_helper->redirector('login', 'auth', 'default');
 	}
 	
 	public function loginAction()
@@ -29,7 +29,7 @@ class AuthController extends Sunny_Controller_AdminAction
 		// проверяем, авторизирован ли пользователь
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			// если да, то делаем редирект, чтобы исключить многократную авторизацию
-			$this->_helper->redirector('index', 'index');
+			$this->_helper->redirector('index', 'admin-index', 'default');
 		}
 		
 		// создаём форму и передаём её во view
@@ -55,7 +55,7 @@ class AuthController extends Sunny_Controller_AdminAction
 		
 				// получаем введённые данные
 				$username = $this->getRequest()->getPost('username');
-				$password = $this->getRequest()->getPost('password');
+				$password = md5($this->getRequest()->getPost('password'));
 		
 				// подставляем полученные данные из формы
 				$authAdapter->setIdentity($username)
@@ -81,7 +81,7 @@ class AuthController extends Sunny_Controller_AdminAction
 		
 					// Используем библиотечный helper для редиректа
 					// на controller = index, action = index
-					$this->_helper->redirector('index', 'index');
+					$this->_helper->redirector('index', 'admin-index', 'default');
 				} else {
 					$this->view->errMessage = 'Вы ввели неверное имя пользователя или неверный пароль';
 				}
@@ -95,7 +95,7 @@ class AuthController extends Sunny_Controller_AdminAction
 		Zend_Auth::getInstance()->clearIdentity();
 	
 		// и отправляем его на главную
-		$this->_helper->redirector('index', 'index');
+		$this->_helper->redirector('index', 'index', 'default');
 	}
 	
 }

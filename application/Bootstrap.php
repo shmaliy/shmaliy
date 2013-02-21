@@ -287,7 +287,7 @@ class Bootstrap extends Core_Application_Bootstrap_Abstract
 		$acl->addRole('admin', 'guest');
 
 		// разрешаем гостю просматривать ресурс index
-		$acl->allow('guest', 'index', array('index'));
+		$acl->allow('guest', 'index', array());
 
 		// разрешаем гостю просматривать ресурс auth и его подресурсы
 		$acl->allow('guest', 'auth', array('index', 'login', 'logout'));
