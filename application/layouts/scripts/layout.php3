@@ -43,12 +43,18 @@ var parser = new(less.Parser)({
 	<div class="push1"></div>
 	<?php
 	    // Применяем уже знакомый метод для проверки авторизации пользователя
-	    if (Zend_Auth::getInstance()->hasIdentity()) {
-	        $url = $this->url(array('controller'=>'auth', 'action'=>'logout'));
+	    /*if (Zend_Auth::getInstance()->hasIdentity()) {
+	        $url = $this->url(array('module'=> 'default', 'controller'=>'auth', 'action'=>'logout'));
 	        // если пользователь авторизирован, показываем ему кнопку "Выход"
 	        echo "<a href=\"{$url}\">Выход</a>";
-	    }
-	?>
+	    }*/
+	    
+	    if (Zend_Auth::getInstance()->hasIdentity()) : ?>
+	    	<a href="/default/auth/logout">Свалить</a>
+	    <?php endif ?>
+	    
+	
+	
 	<?php //echo $this->Seo();?>
 	<?php if ($_SERVER['REQUEST_URI'] != '/' && $_SERVER['REQUEST_URI'] != '') : ?>
 	<div class="breadcrumbs">

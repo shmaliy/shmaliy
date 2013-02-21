@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildpath>
-	<buildpathentry kind="src" path="library/Core/Image"/>
-	<buildpathentry kind="src" path="application"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
-	<buildpathentry kind="src" path="library/Core/Application/Bootstrap"/>
 	<buildpathentry external="true" kind="lib" path="W:/home/zf"/>
-	<buildpathentry kind="src" path="library/Core/Controller/Router/Route"/>
-	<buildpathentry kind="src" path="library/Core/View/Helper"/>
-	<buildpathentry kind="src" path="library/Core/Controller/Plugin"/>
-	<buildpathentry kind="src" path="library/Core/Application/Module"/>
-	<buildpathentry kind="src" path="public"/>
+	<buildpathentry kind="src" path=""/>
 </buildpath>

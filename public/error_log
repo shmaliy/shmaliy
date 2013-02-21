@@ -15,3 +15,40 @@ Stack trace:
 #6 W:\home\zf\Zend\View.php(108): include('W:\home\online-...')
 #7 W:\home\zf\Zend\View\Abstract.php(888): Zend_View->_run('W:\home\online-...')
 #8 W:\home\zf\Zend\Layout.php(796): Zend_View_Abstract->render in W:\home\zf\Zend\Controller\Plugin\Broker.php on line 336
+[21-Feb-2013 09:50:30] PHP Fatal error:  Nesting level too deep - recursive dependency? in W:\home\shmaliy\application\plugins\AccessCheck.php on line 19
+[21-Feb-2013 09:50:46] PHP Fatal error:  Uncaught exception 'Zend_Session_Exception' with message 'Session must be started before any output has been sent to the browser; output started in W:\home\shmaliy\application\plugins\AccessCheck.php/18' in W:\home\zf\Zend\Session.php:443
+Stack trace:
+#0 W:\home\zf\Zend\Session\Namespace.php(143): Zend_Session::start(true)
+#1 W:\home\zf\Zend\Auth\Storage\Session.php(87): Zend_Session_Namespace->__construct('Zend_Auth')
+#2 W:\home\zf\Zend\Auth.php(91): Zend_Auth_Storage_Session->__construct()
+#3 W:\home\zf\Zend\Auth.php(141): Zend_Auth->getStorage()
+#4 W:\home\shmaliy\application\layouts\scripts\layout.php3(46): Zend_Auth->hasIdentity()
+#5 W:\home\zf\Zend\View.php(108): include('W:\home\shmaliy...')
+#6 W:\home\zf\Zend\View\Abstract.php(888): Zend_View->_run('W:\home\shmaliy...')
+#7 W:\home\zf\Zend\Layout.php(796): Zend_View_Abstract->render('layout.php3')
+#8 W:\home\zf\Zend\Layout\Controller\Plugin\Layout.php(143): Zend_Layout->render()
+#9 W:\home\zf\Zend\Controller\Plugin\Broker.php(333): Zend_Layout_Controll in W:\home\zf\Zend\Controller\Plugin\Broker.php on line 336
+[21-Feb-2013 09:51:16] PHP Fatal error:  Uncaught exception 'Zend_Session_Exception' with message 'Session must be started before any output has been sent to the browser; output started in W:\home\shmaliy\application\plugins\AccessCheck.php/18' in W:\home\zf\Zend\Session.php:443
+Stack trace:
+#0 W:\home\zf\Zend\Session\Namespace.php(143): Zend_Session::start(true)
+#1 W:\home\zf\Zend\Auth\Storage\Session.php(87): Zend_Session_Namespace->__construct('Zend_Auth')
+#2 W:\home\zf\Zend\Auth.php(91): Zend_Auth_Storage_Session->__construct()
+#3 W:\home\zf\Zend\Auth.php(141): Zend_Auth->getStorage()
+#4 W:\home\shmaliy\application\layouts\scripts\layout.php3(46): Zend_Auth->hasIdentity()
+#5 W:\home\zf\Zend\View.php(108): include('W:\home\shmaliy...')
+#6 W:\home\zf\Zend\View\Abstract.php(888): Zend_View->_run('W:\home\shmaliy...')
+#7 W:\home\zf\Zend\Layout.php(796): Zend_View_Abstract->render('layout.php3')
+#8 W:\home\zf\Zend\Layout\Controller\Plugin\Layout.php(143): Zend_Layout->render()
+#9 W:\home\zf\Zend\Controller\Plugin\Broker.php(333): Zend_Layout_Controll in W:\home\zf\Zend\Controller\Plugin\Broker.php on line 336
+[21-Feb-2013 09:54:06] PHP Fatal error:  Uncaught exception 'Zend_Controller_Response_Exception' with message 'Cannot send headers; headers already sent in W:\home\shmaliy\application\plugins\AccessCheck.php, line 18' in W:\home\zf\Zend\Controller\Response\Abstract.php:323
+Stack trace:
+#0 W:\home\zf\Zend\Controller\Response\Abstract.php(341): Zend_Controller_Response_Abstract->canSendHeaders(true)
+#1 W:\home\zf\Zend\Controller\Response\Abstract.php(768): Zend_Controller_Response_Abstract->sendHeaders()
+#2 W:\home\zf\Zend\Controller\Front.php(992): Zend_Controller_Response_Abstract->sendResponse()
+#3 W:\home\zf\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 W:\home\shmaliy\application\Bootstrap.php(31): Zend_Application_Bootstrap_Bootstrap->run()
+#5 W:\home\zf\Zend\Application.php(366): Bootstrap->run()
+#6 W:\home\shmaliy\public\index.php(58): Zend_Application->run()
+#7 {main}
+  thrown in W:\home\zf\Zend\Controller\Response\Abstract.php on line 323
+[21-Feb-2013 09:54:37] PHP Fatal error:  Call to undefined method Default_Model_DbTable_ZfUsers::setTableName() in W:\home\shmaliy\application\modules\default\controllers\AuthController.php on line 52

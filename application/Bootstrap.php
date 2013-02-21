@@ -15,7 +15,7 @@ class Bootstrap extends Core_Application_Bootstrap_Abstract
 	    	$this->setModules(); // merge config with modules config           
 	    	$this->setView();
 			$this->setPlugins();
-			//$this->_initAcl();
+			$this->_setAcl();
 	        $this->_setDatabases();	 
 	        $router = $this->setRouter();	    	
             $front = Zend_Controller_Front::getInstance();            
@@ -148,7 +148,7 @@ class Bootstrap extends Core_Application_Bootstrap_Abstract
 	    $router->addRoute(
 	    		'dynamic_list',
 	    		new Zend_Controller_Router_Route_Regex(
-    				'([a-zA-Z\/]+)',
+    				'([a-zA-Z\/]+).html',
     				array(
     						'module' => 'content',
     						'controller' => 'index',
@@ -164,7 +164,7 @@ class Bootstrap extends Core_Application_Bootstrap_Abstract
 	    $router->addRoute(
 	    		'dynamic_item',
 	    		new Zend_Controller_Router_Route_Regex(
-    				'([a-zA-Z\/]+)/([0-9]+)',
+    				'([a-zA-Z\/]+)/([0-9]+).html',
     				array(
     						'module' => 'content',
     						'controller' => 'index',
@@ -245,7 +245,7 @@ class Bootstrap extends Core_Application_Bootstrap_Abstract
 	}
 	
 	
-	protected function _initAcl()
+	protected function _setAcl()
 	{
 		// Создаём объект Zend_Acl
 		$acl = new Zend_Acl();

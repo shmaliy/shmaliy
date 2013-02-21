@@ -15,6 +15,11 @@ class Application_Plugin_AccessCheck extends Zend_Controller_Plugin_Abstract
 
 	public function preDispatch(Zend_Controller_Request_Abstract $request) {
 		// получаем имя текущего ресурса
+// 		echo '<pre>';
+// 		print_r($request->getParams());
+// 		echo '</pre>';
+// 		return;
+		
 		$resource = $request->getControllerName();
 
 		// получаем имя action
@@ -31,6 +36,7 @@ class Application_Plugin_AccessCheck extends Zend_Controller_Plugin_Abstract
 		// то отсылаем его на страницу авторизации
 		if (!$this->_acl->isAllowed($role, $resource, $action)) {
 			$request->setControllerName('auth')->setActionName('index');
+			$request->setDispatched(true);
 		}
 	}
 }

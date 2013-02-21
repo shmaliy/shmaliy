@@ -14,7 +14,7 @@ class AuthController extends Sunny_Controller_AdminAction
 
 		// Add actions wich can work with ajax
 		$context = $this->_helper->AjaxContext();
-		$context->addActionContext('config', 'json');
+		//$context->addActionContext('config', 'json');
 		$context->initContext('json');
 	}
 	
@@ -25,7 +25,7 @@ class AuthController extends Sunny_Controller_AdminAction
 	
 	public function loginAction()
 	{
-		return;
+// 		return;
 		// проверяем, авторизирован ли пользователь
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			// если да, то делаем редирект, чтобы исключить многократную авторизацию
@@ -43,8 +43,8 @@ class AuthController extends Sunny_Controller_AdminAction
 			// Если форма заполнена верно
 			if ($form->isValid($formData)) {
 				// Получаем адаптер подключения к базе данных
-				//$authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
-				$authAdapter = new Default_Model_DbTable_ZfUsers();
+				$authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+				//$authAdapter = new Default_Model_DbTable_ZfUsers();
 		
 				// указываем таблицу, где необходимо искать данные о пользователях
 				// колонку, где искать имена пользователей,
