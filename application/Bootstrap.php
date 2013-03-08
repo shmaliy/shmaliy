@@ -85,8 +85,12 @@ class Bootstrap extends Core_Application_Bootstrap_Abstract
 		$url = explode('/', $url);
 		
 		
-		if($url[0] == 'admin'){
-			$layout->setLayout('admin');
+		if ($url[0] == 'admin') {
+			if (Zend_Auth::getInstance()->hasIdentity()) {
+				$layout->setLayout('admin-layout');
+			} else {
+				header("Location: /login");
+			}	
 		} else {
 			$layout->setLayout('layout');
 		}
@@ -143,77 +147,87 @@ class Bootstrap extends Core_Application_Bootstrap_Abstract
 	    	)
 	    );
 	    $router->addRoute('index', $route);
+	    
+	    $route = new Zend_Controller_Router_Route (
+	    		'login',
+	    		array(
+	    				'module' => 'default',
+	    				'controller' => 'auth',
+	    				'action'     => 'login',
+	    		)
+	    );
+	    $router->addRoute('login', $route);
 
 	    
-	    $router->addRoute(
-	    		'dynamic_list',
-	    		new Zend_Controller_Router_Route_Regex(
-    				'([a-zA-Z\/]+).html',
-    				array(
-    						'module' => 'content',
-    						'controller' => 'index',
-    						'action' => 'dynamic-list',
-    						'path' => '',
-    				),
-    				array(
-    						1 => 'path',
-    				),
-    				'%s'
-	    ));
+// 	    $router->addRoute(
+// 	    		'dynamic_list',
+// 	    		new Zend_Controller_Router_Route_Regex(
+//     				'([a-zA-Z\/]+).html',
+//     				array(
+//     						'module' => 'content',
+//     						'controller' => 'index',
+//     						'action' => 'dynamic-list',
+//     						'path' => '',
+//     				),
+//     				array(
+//     						1 => 'path',
+//     				),
+//     				'%s'
+// 	    ));
 	    
-	    $router->addRoute(
-	    		'dynamic_item',
-	    		new Zend_Controller_Router_Route_Regex(
-    				'([a-zA-Z\/]+)/([0-9]+).html',
-    				array(
-    						'module' => 'content',
-    						'controller' => 'index',
-    						'action' => 'dynamic-item',
-    						'path' => '',
-    						'id' => '',
-    				),
-    				array(
-    						1 => 'path',
-    						2 => 'id'
-    				),
-    				'%s/%s'
-	    ));
+// 	    $router->addRoute(
+// 	    		'dynamic_item',
+// 	    		new Zend_Controller_Router_Route_Regex(
+//     				'([a-zA-Z\/]+)/([0-9]+).html',
+//     				array(
+//     						'module' => 'content',
+//     						'controller' => 'index',
+//     						'action' => 'dynamic-item',
+//     						'path' => '',
+//     						'id' => '',
+//     				),
+//     				array(
+//     						1 => 'path',
+//     						2 => 'id'
+//     				),
+//     				'%s/%s'
+// 	    ));
 	    
-	    $router->addRoute(
-	    		'cat_static', 
-	    		new Zend_Controller_Router_Route_Regex(
-	    			'([a-zA-Z0-9\/]*)/([a-zA-Z0-9]*).html',
-		    		array(
-		    				'module' => 'content',
-		    				'controller' => 'index',
-		    				'action' => 'static',
-		    				'mode' => 'cat',
-		    				'path' => '',
-		    				'alias' => ''
-		    		),
-		    		array(
-		    				1 => 'path',
-		    				2 => 'alias'
-		    		),
-	    			'%s/%s'
-	    ));
+// 	    $router->addRoute(
+// 	    		'cat_static', 
+// 	    		new Zend_Controller_Router_Route_Regex(
+// 	    			'([a-zA-Z0-9\/]*)/([a-zA-Z0-9]*).html',
+// 		    		array(
+// 		    				'module' => 'content',
+// 		    				'controller' => 'index',
+// 		    				'action' => 'static',
+// 		    				'mode' => 'cat',
+// 		    				'path' => '',
+// 		    				'alias' => ''
+// 		    		),
+// 		    		array(
+// 		    				1 => 'path',
+// 		    				2 => 'alias'
+// 		    		),
+// 	    			'%s/%s'
+// 	    ));
 	    
-	    $router->addRoute(
-	    		'static',
-	    		new Zend_Controller_Router_Route_Regex(
-    				'([a-zA-Z0-9]*).html',
-    				array(
-    						'module' => 'content',
-    						'controller' => 'index',
-    						'action' => 'static',
-    						'mode' => 'root',
-    						'alias' => ''
-    				),
-    				array(
-    					1 => 'alias'
-    				),
-    				'%s'
-    	));
+// 	    $router->addRoute(
+// 	    		'static',
+// 	    		new Zend_Controller_Router_Route_Regex(
+//     				'([a-zA-Z0-9]*).html',
+//     				array(
+//     						'module' => 'content',
+//     						'controller' => 'index',
+//     						'action' => 'static',
+//     						'mode' => 'root',
+//     						'alias' => ''
+//     				),
+//     				array(
+//     					1 => 'alias'
+//     				),
+//     				'%s'
+//     	));
 	    
         
 	    return $router;
@@ -304,7 +318,7 @@ class Bootstrap extends Core_Application_Bootstrap_Abstract
 		// регистрируем плагин с названием AccessCheck, в который передаём
 		// на ACL и экземпляр Zend_Auth
 		
-		$fc->registerPlugin(new Application_Plugin_AccessCheck($acl, Zend_Auth::getInstance()));
+		//$fc->registerPlugin(new Application_Plugin_AccessCheck($acl, Zend_Auth::getInstance()));
 	}
 	
 	

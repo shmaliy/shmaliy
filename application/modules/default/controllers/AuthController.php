@@ -9,7 +9,7 @@ class AuthController extends Sunny_Controller_AdminAction
 	 */
 	public function init()
 	{
-		$this->_helper->layout->setLayout('admin-layout');
+		$this->_helper->layout->setLayout('login-layout');
 		parent::init();
 
 		// Add actions wich can work with ajax
@@ -77,11 +77,15 @@ class AuthController extends Sunny_Controller_AdminAction
 		
 					// помещаем туда информацию о пользователе,
 					// чтобы иметь к ним доступ при конфигурировании Acl
-					$authStorage->write($identity);
+					$authStorage->write($authAdapter->getResultRowObject(array(
+				        'id',
+						'username',
+				        'zf_roles_id',
+				    )));
 		
 					// Используем библиотечный helper для редиректа
 					// на controller = index, action = index
-					$this->_helper->redirector('index', 'admin-index', 'default');
+					$this->_helper->redirector('index', 'index', 'admin');
 				} else {
 					$this->view->errMessage = 'Вы ввели неверное имя пользователя или неверный пароль';
 				}
@@ -95,7 +99,7 @@ class AuthController extends Sunny_Controller_AdminAction
 		Zend_Auth::getInstance()->clearIdentity();
 	
 		// и отправляем его на главную
-		$this->_helper->redirector('index', 'index', 'default');
+		$this->_helper->redirector('login', 'auth', 'default');
 	}
 	
 }

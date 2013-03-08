@@ -1,0 +1,74 @@
+/* CSS Document */
+
+@resize-width: 100%;
+@header-height: 50px;
+@footer-height: 50px;
+
+html, body, img, div, a, span, p { margin:0; padding:0; }
+html, body { height:100%; width:100%; font-family: Tahoma; color:#000; font-size:12px;}
+html { }
+
+a {outline:none; color:#000000;}
+img {border:none;}
+.clear { clear:both;}
+.push1 { height:@header-height; }
+.push2 { height:@footer-height; }
+
+.header { 
+	position:absolute; 
+	width:100%; 
+	height:@header-height; 
+	left:0;
+	z-index:10000;
+	padding:0 0 0 0;
+	
+	
+	&-resize {
+		width:@resize-width; 
+		height:@header-height; 
+		margin:0 auto;
+		z-index:0;
+		
+		
+		& .logo {
+			display: block;
+			width: 249px;
+			height:@header-height; 
+			float:left;
+			background: url(/theme/img/admin/logo.png) top 17px left 13px no-repeat;
+		}
+		
+		& .main-menu {
+			float:left;
+			height:@header-height; 
+			
+			& .navigation {
+				height:@header-height;
+				margin:0;
+				padding:0;
+				list-style:none;
+				
+				& li {
+					height:@header-height;
+					display: block;
+					float:left;
+					background: #f0f0f0;
+					
+					& .zf_menu_2 {
+						height:@header-height;
+						display: block;
+						
+					}	
+				
+				}
+			}
+		}
+		
+		& .log-out {
+			float:right;
+			width: 76px;
+			display: block;
+			height:@header-height; 
+		}
+	}
+}
