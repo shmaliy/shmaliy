@@ -52,12 +52,77 @@ img {border:none;}
 					height:@header-height;
 					display: block;
 					float:left;
-					background: #f0f0f0;
+					position: relative;
 					
-					& .zf_menu_2 {
+					& ul {
+						position: absolute;	
+						margin: 2px 0 0 0;
+						width: 200px;
+						display:none;
+						
+						& li {
+							height:20px;
+							display: block;
+							position: relative;
+							
+							& a {
+								height:20px;
+								display: block;
+								background: #f0f0f0;
+								margin: 0 3px 0 0;
+								color: #626262;
+								&:hover {
+									background: #f8f8f8;
+								}
+								
+								& img {
+									width:20px;
+									height:20px;
+									display: block;
+									margin: 0 5px 0 0;
+									float:left;
+								}
+								
+								& span {
+									height:20px;
+									display: block;
+									margin: 0 10px 0 0;
+									float:left;
+									font-weight:normal;
+								}
+							}
+						}
+					}
+					
+					& a {
 						height:@header-height;
 						display: block;
+						background: #f0f0f0;
+						margin: 0 3px 0 0;
+						color: #626262;
+						&:hover {
+							background: #f8f8f8;
+						}
 						
+						& img {
+							width:20px;
+							height:20px;
+							display: block;
+							margin: 15px 5px 0 0;
+							float:left;
+						}
+						
+						& span {
+							height:20px;
+							display: block;
+							margin: 17px 10px 0 0;
+							float:left;
+							font-weight:bold;
+						}
+					}
+					
+					& .active_main, .active_branch {
+						background: #f8f8f8;
 					}	
 				
 				}
@@ -69,6 +134,202 @@ img {border:none;}
 			width: 76px;
 			display: block;
 			height:@header-height; 
+			background: url(/theme/img/admin/logout-top.png) top 15px left no-repeat #f1f1f1;
+			text-decoration: none;
+			
+			& span {
+				display: block;
+				margin: 17px 0 0 25px;
+				font-weight:bold;
+				color: #626262;
+			}
+			&:hover {
+				background: url(/theme/img/admin/logout-top.png) top 15px left no-repeat #f8f8f8;
+			}
 		}
+	}
+}
+
+.body {
+	width:100%;
+	height:auto !important;
+	height:100%;
+	min-height:100%;
+	margin:0 auto;
+}
+
+.body-info {
+	margin:15px 20px 20px 20px;
+	
+	& h1 {
+		font-size:28px;
+		font-weight:normal;
+	}
+	
+	& .breadcrubmbs {
+		margin: 10px 0 0 0; 
+	}
+}
+
+.main-field {
+	float:left;
+	display:block;
+	margin: 0 15px 25px 20px;
+}
+
+.controls {
+	float:left;
+	width:120px;
+	display:block;
+	position:relative;
+	
+	& .wrapper {
+		position:fixed;
+		margin:0 25px 0 0;
+		width:95px;
+		display:block;
+		
+		& ul {
+			width:85px;
+			margin:0 auto;
+			padding:0;
+			height:105px;
+			list-style:none;
+			
+			& li {
+				width:85px;
+				margin:0 0 10px 0;
+				padding:0;
+				height:105px;
+				display:block;
+				& a {
+					display:block;
+					width:85px;
+					height:105px;
+					
+					& span {
+						height:20px;
+						width:85px;
+						display:block;
+						padding:85px 0 0 0;
+						text-align:center;
+					}
+				}
+				
+				& .add {
+					background: url(/theme/img/admin/controls/add.png) top left no-repeat;
+				}
+				
+				& .apply {
+					background: url(/theme/img/admin/controls/apply.png) top left no-repeat;
+				}
+				
+				& .copy {
+					background: url(/theme/img/admin/controls/copy.png) top left no-repeat;
+				}
+				
+				& .delete {
+					background: url(/theme/img/admin/controls/delete.png) top left no-repeat;
+				}
+				
+				& .move {
+					background: url(/theme/img/admin/controls/move.png) top left no-repeat;
+				}
+				
+				& .save {
+					background: url(/theme/img/admin/controls/save.png) top left no-repeat;
+				}
+				
+				& .cancel {
+					background: url(/theme/img/admin/controls/cancel.png) top left no-repeat;
+				}
+			}
+		}
+	}
+	
+}
+
+.greed {
+
+	& thead {
+		& td {
+			font-weight: bold;
+			background: #f0f0f0;
+			color: #6b6b6b;
+		}
+	}
+}
+
+.form-wrapper {
+	width: 445px;
+	background: #f1f1f1;
+	margin:0 auto;
+	
+	& .login-error {
+		padding:10px 0 15px 20px;
+		color:red;
+	}
+	
+	&-header {
+		width: 100%;
+		height:50px;
+		background: url(/theme/img/admin/login-header.png) top left no-repeat #ff7e00;
+		
+		& span {
+			display:block;
+			font-size:27px;
+			color: white;
+			padding:16px 0 0 65px;
+		}
+	}
+	
+	& .form-composite {
+		margin:15px 0 20px 20px;
+		
+		&-element {
+			
+			&-label {
+				float:left;
+				clear: both;
+				display:block;
+				width:100px;
+				padding:7px 0 0 0;
+				&-text {
+					font-size:16px;
+				}
+				
+				&-wildcard {
+					font-size:16px;
+				}
+			}
+			
+			&-errors {
+				display:block;
+				font-size:10px;
+				color:red;
+				display:block;
+				margin:-10px 0 15px 100px;
+				
+			}
+			
+			&-tag {
+				
+				
+			}
+		}
+	}
+}
+
+.footer { 
+	width:100%; 
+	height:@footer-height; 
+	margin-top:-@footer-height;
+	
+	&-resize {
+		width:100%; 
+		margin:0 0 0 20px;; 
+		height:@footer-height; 
+		overflow: hidden;
+		margin:0 auto;
 	}
 }

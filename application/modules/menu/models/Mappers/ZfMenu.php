@@ -28,6 +28,7 @@ class Menu_Model_Mapper_ZfMenu extends Sunny_DataMapper_MapperAbstract
 		return $_tree;
 	}
 	
+	
 	public function zfMenuAdmin($role = 1)
 	{
 		$select = $this->getDbTable()->select();
@@ -45,7 +46,7 @@ class Menu_Model_Mapper_ZfMenu extends Sunny_DataMapper_MapperAbstract
 		$list = $this->getDbTable()->fetchAll($select, null);
 		
 // 		echo '<pre>';
-// 		var_export($this->makeZfNavContainer($list, 'admin-main'));
+// 		var_export($this->makeZfNavContainerAdmin($list, 'admin-main'));
 // 		echo '</pre>';
 		
 		$container = $this->makeZfNavContainerAdmin($list, 'admin-main');
@@ -60,96 +61,48 @@ class Menu_Model_Mapper_ZfMenu extends Sunny_DataMapper_MapperAbstract
 		
 	}
 	
-	
-	public function makeNavContainer($array, $alias = null, $parent = 0, $level = 0)
-	{
-		
-		$catsMapper = new Content_Model_Mapper_Cmscategories();
-		$contMapper = new Content_Model_Mapper_Cmscontent();
-		
-		$_tree = array();
-		$level++;
-		
-		$current = $_SERVER['REQUEST_URI'];
-		
-		foreach ($array as &$item) {
-			if ($item['parent_id'] == $parent) {
-				
-				$link = trim($item['link'], '/');
-				
-
-				$pages = $this->makeNavContainer($array, null, $item['id'], $level);
-				
-				if (!strstr($link, '.html') && !preg_match('[0-9]+', $link) && $link != '')
-				{
-					
-					$rcontents = $contMapper->getContentList($item['link']);
-					
-						
-					if (!empty($rcontents)) {
-						foreach ($rcontents as $ritem) {
-							array_push($pages, $ritem);
-						}
-					}
-					
-					$cats = $catsMapper->makeCatsTree($link);
-					if (!empty($cats)) {
-						foreach ($cats as &$cat) {
-							
-							$contents = $contMapper->getContentList($cat['uri']);
-							
-							if (!empty($contents)) {
-								$cat['pages'] = $contents;
-							}
-							
-							array_push($pages, $cat);
-						}
-					}
-				}
-				
-				$class='mainmenu_' . $level;
-				
-				$_tree[] = array(
-						'label'   	=> $item['title'],
-						'uri' 	  	=> $item['link'],
-						'class'		=> $class,
-						'pages'		=> $pages,
-						'active'	=> $_SERVER['REQUEST_URI'] == $item['link']
-				);
-			}
-		}
-		
-		return $_tree;
-	}
-	
-	public function mainMenu($alias = null)
+	public function cmsGetMenuItems($parent = null)
 	{
 		$select = $this->getDbTable()->select();
 		$select->setIntegrityCheck(false);
 		
 		$select->from(
-			array('menu' => 'cmsmenu')		
+				array('menu' => 'zf_menu')
 		);
 		
-		$select->where('menu.published = 1');
+		if (!is_null($parent)) {
+			$select->where('menu.zf_menu_id = ?', $parent);
+		}
 		
 		$select->order('menu.ordering');
 		
+		$select->joinLeft(
+			array('roles' => 'zf_roles'),
+			"roles.id = menu.zf_roles_id",
+			array(
+				"zf_roles_title" => "roles.title"		
+			)		
+		);
+		
+		$select->joinLeft(
+			array('parent_menu' => 'zf_menu'),
+			"parent_menu.id = menu.zf_menu_id",
+			array(
+				"zf_menu_title" => "parent_menu.title"
+			)
+		);
+		
+		$select->joinLeft(
+			array('users' => 'zf_users'),
+			"users.id = menu.zf_users_id",
+			array(
+				"zf_users_name" => "users.name"
+			)
+		);
+		
 		$list = $this->getDbTable()->fetchAll($select, null);
 		
-// 		echo '<pre>';
-// 		var_export($list);
-// 		echo '</pre>';
-		
-// 		echo '<pre>';
-// 		var_export($this->makeNavContainer($list, $alias));
-// 		echo '</pre>';
-		
-		$container = $this->makeNavContainer($list, $alias);
-		$container = new Zend_Navigation($container);
-		Zend_Registry::set('nav_container', $container);
-		
-		return $container;
+		return $list;
 	}
 	
 }

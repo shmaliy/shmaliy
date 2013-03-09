@@ -88,6 +88,12 @@ class Bootstrap extends Core_Application_Bootstrap_Abstract
 		if ($url[0] == 'admin') {
 			if (Zend_Auth::getInstance()->hasIdentity()) {
 				$layout->setLayout('admin-layout');
+				$auth = Zend_Auth::getInstance()->getStorage()->read();
+								
+				Zend_Registry::set('auth_role', $auth->zf_roles_id);
+				$menu = new Menu_Model_Mapper_ZfMenu();
+				$menu->zfMenuAdmin($auth->zf_roles_id);
+				
 			} else {
 				header("Location: /login");
 			}	

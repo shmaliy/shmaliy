@@ -21,10 +21,11 @@ class Default_Form_FormLogin extends Sunny_Form
             ->setRequired(true)
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
+            ->setAttrib('placeholder', 'Введите текст…')
             ->addValidator('NotEmpty', true,
                 array('messages' => array('isEmpty' => $isEmptyMessage))
             );
-         
+                 
         // создаём элемент формы для пароля
         $password = new Zend_Form_Element_Password('password');
          
@@ -34,13 +35,16 @@ class Default_Form_FormLogin extends Sunny_Form
             ->setRequired(true)
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
+            ->setAttrib('placeholder', 'Введите текст…')
             ->addValidator('NotEmpty', true,
                 array('messages' => array('isEmpty' => $isEmptyMessage))
             );
          
         // создаём кнопку submit
         $submit = new Zend_Form_Element_Submit('login');
-        $submit->setLabel('Войти в систему');
+        $submit->setValue('Войти в систему')
+        		->setAttrib('class', 'btn')
+        		->setLabel();
          
         // добавляем элементы в форму
         $this->addElements(array($username, $password, $submit));
