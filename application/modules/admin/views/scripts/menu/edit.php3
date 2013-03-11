@@ -1,5 +1,5 @@
 <div class="main-field">
-	
+	<?php echo $this->form; ?>
 </div>
 <div class="controls">
 	<div class="wrapper">

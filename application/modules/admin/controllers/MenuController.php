@@ -12,6 +12,7 @@ class Admin_MenuController extends Sunny_Controller_AdminAction
    		$this->_auth = Zend_Auth::getInstance()->getStorage()->read();
    		$context = $this->_helper->AjaxContext();
    		$context->addActionContext('index', 'json');
+   		$context->addActionContext('edit', 'json');
    		$context->addActionContext('publish', 'json');
    		$context->initContext('json');
    		
@@ -33,7 +34,14 @@ class Admin_MenuController extends Sunny_Controller_AdminAction
 	
 	public function editAction()
 	{
+		$request = $this->getRequest();
+		$form = new Admin_Form_MenuitemEdit();
 		
+		if ($request->isXmlHttpRequest() || $request->isPost()) {
+			
+		} else {
+			$this->view->form = $form;
+		}
 	}
 	
 	public function renderAction()

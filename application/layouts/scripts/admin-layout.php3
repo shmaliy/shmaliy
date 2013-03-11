@@ -1,20 +1,13 @@
-<?php echo $this->doctype('XHTML1_TRANSITIONAL'); ?>
 <?php 
-	$nav = Zend_Registry::get('zf_nav_container');
-// 	echo '<pre>';
-// 	var_export($nav->toArray());
-// 	echo '</pre>';
- 					
-	$found = $nav->findOneBy('active', true);
-					
-	//print_r($found);
- 									
+	echo $this->doctype('XHTML1_TRANSITIONAL'); 
+	$menu = new Menu_Model_Mapper_ZfMenu();
+	$near = $menu->getMostNear(Zend_Registry::get('zf_nav_container'));
 	$auth = Zend_Auth::getInstance()->getStorage()->read();
-	
+	echo $this->navigation(Zend_Registry::get('zf_nav_container'))->breadcrumbs()->setMinDepth(1)->setPartial(array('make-title.php3', 'admin'));
 ?>
 <html>
 <head>
-<?php $this->headTitle('Управление сайтом')->setSeparator(' | '); ?>
+<?php $this->headTitle('Управление сайтом pht: Shmaliy')->setSeparator(' | '); ?>
 
 <?
 	$this->headMeta()->appendName('keywords', 'OBS, optimal, shmaliy')
@@ -89,14 +82,12 @@ if (is_object($found)) {
 		<div class="push1"></div>
 		<div class="body-info">
 			<h1>
-				<?php 
-  					if (is_object($found)) {
-						echo $title;
-					}
-				?>
+				<?php echo $near; ?>
 			</h1>
 			<div class="breadcrubmbs">
-				<?php echo $this->navigation($nav)->breadcrumbs()->setMinDepth(1)->setSeparator(' &rarr;' . PHP_EOL); ?>
+				<?php
+					echo $this->navigation(Zend_Registry::get('zf_nav_container'))->breadcrumbs()->setMinDepth(0)->setSeparator(' &rarr; ' . PHP_EOL)->renderStraight(); 
+				?>
 			</div>	
 		</div>
 		<?php echo $this->layout()->content; ?>

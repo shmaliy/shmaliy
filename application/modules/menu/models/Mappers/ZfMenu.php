@@ -3,6 +3,8 @@
 class Menu_Model_Mapper_ZfMenu extends Sunny_DataMapper_MapperAbstract
 {
 	
+	private $_mostNear;
+	
 	public function makeZfNavContainerAdmin($array, $alias = null, $parent = 0, $level = 0)
 	{
 		$_tree = array();
@@ -28,7 +30,41 @@ class Menu_Model_Mapper_ZfMenu extends Sunny_DataMapper_MapperAbstract
 		return $_tree;
 	}
 	
+	public function findMostNear($container, $url = array())
+	{
+// 		echo '<pre>';
+// 		var_export($container->toArray());
+// 		echo '</pre>';
+// 		return;
+		
+		if (empty($url)) {
+			$url = explode('/', trim($_SERVER['REQUEST_URI'], '/'));
+		}
+		
+		$href = '/' . implode('/', $url);
+// 		echo $href . '<br />' ;
+		
+		$found = $container->findOneBy('href', $href);
+// 		var_dump($found);
+		
+		if(!$found) {
+			unset($url[count($url)-1]);
+			if (!empty($url)) {
+				$this->findMostNear($container, $url);
+			} else return false;			
+		} else {
+			$found->setActive();
+			Zend_Registry::set('zf_nav_container', $container);
+			$this->_mostNear = $found;
+		}
+	}
 	
+	public function getMostNear()
+	{
+		$this->findMostNear(Zend_Registry::get('zf_nav_container'));
+		return $this->_mostNear;
+	}
+			
 	public function zfMenuAdmin($role = 1)
 	{
 		$select = $this->getDbTable()->select();
