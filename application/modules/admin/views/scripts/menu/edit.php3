@@ -13,4 +13,19 @@
 	</div>
 	
 </div>
+
+<div id="image-load-container" style="display:none;">
+	<?php echo $this->action('load-menu-image', 'files', 'default'); ?>
+</div>
 <div class="clear"></div>
+
+<script>
+	function replaceImageController() {
+		var imageHtml = $('#image-load-container').html();
+
+		$('#image > .form-composite-element-img').html(imageHtml);
+	}
+
+	replaceImageController();
+	
+</script>

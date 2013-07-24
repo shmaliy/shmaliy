@@ -7,12 +7,12 @@ class Admin_Form_MenuitemEdit extends Sunny_Form
 		$this->setName(strtolower('menuitem_edit'));
 		$this->setMethod(self::METHOD_POST);
 		$this->setAttrib('onsubmit', 'return false;'); // Force send only with ajax
-		$this->setAttrib('class', 'via_ajax');         // Force send only with ajax
+		$this->setAttrib('class', 'via_ajax admin-form cf');         // Force send only with ajax
 		
 		/*  Externals  */
 		
 		$this->addElement('hidden', 'id');
-// 		$this->addElement('hidden', 'contents_groups_id');
+		$this->addElement('hidden', 'contents_groups_id');
 // 		$this->addElement('hidden', 'zf_menu_id', array('value' => 0));
 		
 		/*  Main  */
@@ -49,22 +49,18 @@ class Admin_Form_MenuitemEdit extends Sunny_Form
 		
 		$img = array('img');
 
-		$this->addElement('button', 'img', array(
-				'label' => 'Загрузить изображение',
-				'buttonLabel' => 'Выбрать',
-				'selectorMode'  => 'file',
-				'selectMultiple' => true,
-				'onClick' => "uiDialogOpen('Выбор файлов', {action:'select-file', controller:'admin-index', module:'media', format:'html', 'field':'file_ids', 'selector-mode': 'file', 'select-multiple':true});"
+		$this->addElement('text', 'img', array(
+				'label' => 'Загрузить изображение'
 		));
 
 		/**
 		 * Сюда выбор картинки и загрузку новой
 		 */
 		
-		$this->addDisplayGroup($img, 'img', array('legend' => 'Изображение'));
+		$this->addDisplayGroup($img, 'image', array('legend' => 'Изображение'));
 		
 		
-		$access = array('zf_menu_id');
+		$access = array('zf_roles_id');
 		
 		$this->addElement('select', 'zf_roles_id', array(
 				'label' => 'Доступ для групп'
@@ -93,7 +89,7 @@ class Admin_Form_MenuitemEdit extends Sunny_Form
 		$this->addPrefixPath('Sunny_Form_Decorator', 'Sunny/Form/Decorator/', 'decorator');
 		$this->setDecorators(array('CompositeFormDiv'));
 		
-		$this->getElement('img')->setDecorators(array('FileSelectorDiv'));
+// 		$this->getElement('img')->setDecorators(array('FileSelectorDiv'));
 // 		$this->getElement('file_ids')->setDecorators(array('FileSelectorDiv'));
 // 		$this->getElement('frontend_date')->setDecorators(array('CalendarText'));
 	}

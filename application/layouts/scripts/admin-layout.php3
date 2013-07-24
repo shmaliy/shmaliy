@@ -18,6 +18,10 @@
 					 ->appendHttpEquiv('Content-Type', 'text/html; charset=windows-1251')
                      ->appendName('document-state', 'dynamic');					 					 					 		
 ?>
+<?php $this->headScript()->appendFile("/js/swfupload/swfupload.js"); ?>
+<?php $this->headScript()->appendFile("/js/swfupload/js/swfupload.queue.js"); ?>
+<?php $this->headScript()->appendFile("/js/swfupload/js/fileprogress.js"); ?>
+<?php $this->headScript()->appendFile("/js/swfupload/js/handlers.js"); ?>
 
 <?php 
 if (is_object($found)) {
@@ -31,35 +35,26 @@ if (is_object($found)) {
 <?php echo $this->headTitle(); ?>
 <?php echo $this->headScript(); ?>
 <?php echo $this->headLink(); ?>
+<link href="/theme/css/swf.css" rel="stylesheet" media="screen">
 <link rel="stylesheet/less" type="text/css" href="/theme/css/admin.less">
 <link href="/theme/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <?php
 	$this->headScript()->appendFile('/js/jquery-1.8.1.min.js');
+	$this->headScript()->appendFile('/js/admin-adaptive.js');
 	$this->headScript()->appendFile('/js/less.min.js');
 	echo $this->headScript();
 ?>
 <script src="/js/bootstrap.min.js"></script>
 <script>
-	function smartColumns() { //функция, подсчитывающая ширину колонок
-
-	  //сброс ширины строки до 100% после изменения размера экрана
-	  var display = $('.header-resize').width();
-	  var logo = $('.logo').width();
-	  var logout = $('.log-out').width();
-
-	  //console.log(display);
-	  
-	  $(".main-menu").css({ 'width' : display - logo - logout-5 + 'px'});
-	  $(".main-field").css({ 'width' : display - 35 - 120 + 'px'});
-	}
-
 	$(document).ready(function(){
 		smartColumns(); //запускаем функцию после загрузки страницы
+		formResize(); //запускаем функцию после загрузки страницы
 	});
 	
 
 	$(window).resize(function () { //запускаем функцию после каждого изменения размера экрана
-	  smartColumns();
+		smartColumns();
+		formResize();
 	});
 </script>
 
@@ -86,7 +81,7 @@ if (is_object($found)) {
 			</h1>
 			<div class="breadcrubmbs">
 				<?php
-					echo $this->navigation(Zend_Registry::get('zf_nav_container'))->breadcrumbs()->setMinDepth(0)->setSeparator(' &rarr; ' . PHP_EOL)->renderStraight(); 
+					echo $this->navigation(Zend_Registry::get('zf_nav_container'))->breadcrumbs()->setMinDepth(1)->setSeparator(' &rarr; ' . PHP_EOL)->renderStraight(); 
 				?>
 			</div>	
 		</div>

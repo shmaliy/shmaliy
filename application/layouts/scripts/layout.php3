@@ -16,18 +16,24 @@
 					 ->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8')
                      ->appendName('document-state', 'dynamic');					 					 					 		
 ?>
+<?php $this->headScript()->appendFile("/js/swfupload/swfupload.js"); ?>
+<?php $this->headScript()->appendFile("/js/swfupload/js/swfupload.queue.js"); ?>
+<?php $this->headScript()->appendFile("/js/swfupload/js/fileprogress.js"); ?>
+<?php $this->headScript()->appendFile("/js/swfupload/js/handlers.js"); ?>
+
 <?php echo $this->headMeta();?>
 <?php echo $this->headTitle(); ?>
 <?php echo $this->headLink(); ?>
 <link rel="stylesheet/less" type="text/css" href="/theme/css/style.less">
 <?php
-	//$this->headScript()->appendFile('/js/jquery-1.8.1.min.js');
+	$this->headScript()->appendFile('/js/jquery-1.8.1.min.js');
+	$this->headScript()->appendFile('/js/swfupload/swfupload.js');
 	$this->headScript()->appendFile('/js/less.min.js');
 	echo $this->headScript();
 ?>
- <link href="/themecss/bootstrap.css" rel="stylesheet" media="screen">
- <script src="/js/bootstrap.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<link href="/theme/css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="/theme/css/swf.css" rel="stylesheet" media="screen">
+<script src="/js/bootstrap.min.js"></script>
 <script>
 var parser = new(less.Parser)({
     paths: ['/theme/css'], // указывает пути поиска для директив @import

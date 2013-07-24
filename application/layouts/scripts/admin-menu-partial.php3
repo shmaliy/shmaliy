@@ -28,10 +28,10 @@ function renderLeftSubMain($page, $level = 0) {
     <ul class="navigation<?php echo ($level != 0) ? '_' . $level : ''; ?>">
     	<?php $level++; ?>
         <?php foreach ($page as $lv1): ?>
-        <li>
+        <li id="menu_<?php echo $lv1->getId();?>" onmouseover="$('#menu_<?php echo $lv1->getId();?> > ul').show();" onmouseout="$('#menu_<?php echo $lv1->getId();?> > ul').hide();">
+        	<?php $prop = $lv1->getCustomProperties();?>
             <a class="<?php echo (isActivePage($lv1)) ? "active_main" : ""; ?> <?php echo (hasActiveInChilds($lv1)) ? "active_branch" : ""; ?>" href="<?php echo $lv1->getHref(); ?>">
-            	<?php $img = $lv1->getCustomProperties();?>
-            	<img src="<?php echo $img['img'];?>">
+            	<img src="<?php echo $prop['img'];?>">
                 <span><?php echo $lv1->getLabel(); ?></span>
                 <div class="clear"></div>
             </a>

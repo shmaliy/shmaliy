@@ -22,7 +22,8 @@ class Menu_Model_Mapper_ZfMenu extends Sunny_DataMapper_MapperAbstract
 						'class'		=> $class,
 						'pages'		=> $pages,
 						'active'	=> $_SERVER['REQUEST_URI'] == $item['href'],
-						'img'		=> $item['img']
+						'img'		=> $item['img'],
+						'id'		=> $item['id']
 				);
 			}
 		}
